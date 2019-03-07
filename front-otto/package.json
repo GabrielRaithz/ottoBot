@@ -1,0 +1,19 @@
+{
+  "name": "robotto",
+  "version": "1.0.0",
+  "description": "bot that speaks german",
+  "main": "index.js",
+  "scripts": {
+    "start": "node otto.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gabriel raithz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "google-translate": "^2.2.0",
+    "rivescript": "^2.0.0-alpha.6",
+	"request": "^2.88.0"
+  },
+  "devDependencies": {}
+}
