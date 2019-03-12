@@ -44,7 +44,7 @@ io.sockets.on('connection', function(socket){
     		request('https://otto-brain.appspot.com/askBot/' + data, function (error, response_bot, body) {
 	        botmessage = response_bot.body;
 	        console.log("botmessage: " + botmessage);
-	        io.sockets.emit('new message', {msg: botmessage, user:"OTTO"});
+	        io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
     	});
 	});
 
@@ -58,10 +58,10 @@ io.sockets.on('connection', function(socket){
 		request('https://otto-brain.appspot.com/askBot/My name is '+ socket.username, function (error, response_bot, body) {
 	    	botmessage = response_bot.body;
 	    	console.log("botmessage: " + botmessage);
-	    	io.sockets.emit('new message', {msg: botmessage, user:"OTTO"});
+	    	io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
     	});
 	});
-})
+});
 
 function updateUsernames(){
 	io.sockets.emit('get users', users);
