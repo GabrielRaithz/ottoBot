@@ -91,8 +91,10 @@
 
        		$userForm.submit(function(e){
       			e.preventDefault();
+			console.log($username.val() + ' user name get in');
       			socket.emit('new user', $username.val(), (data) => {
-      				if(data){
+      				console.log('AAAAA');
+				if(data){
       					$userFormArea.hide();
       					$messageArea.show();
       				}
