@@ -1,0 +1,19 @@
+runtime: nodejs8
+
+# Resource and scaling options. For more background, see:
+#   https://cloud.google.com/appengine/docs/flexible/go/configuring-your-app-with-app-yaml
+
+# TODO(dev): adjust CPU and memory based on actual requirements.
+
+resources:
+  cpu: 2
+  # Instances support between [(cpu * 0.9) - 0.4, (cpu * 6.5) - 0.4]
+  # Actual memory available is exposed via GAE_MEMORY_MB environment variable.
+  memory_gb: 4
+
+  # TODO - Adjust once we understand requirements.
+  disk_size_gb: 10
+
+
+manual_scaling:
+  instances: 5

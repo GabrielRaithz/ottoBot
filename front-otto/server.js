@@ -41,29 +41,38 @@ io.sockets.on('connection', function(socket){
 		callback(true);
 		console.log(data);
 		let botmessage;
-    		request('https://otto-brain.appspot.com/askBot/' + data, function (error, response_bot, body) {
-	        botmessage = response_bot.body;
-	        console.log("botmessage: " + botmessage);
-	        io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
-    	});
+    		if(data != ''){
+			request('https://otto-brain.appspot.com/askBot/' + data, function (error, response_bot, body) {
+	        		botmessage = response_bot.body;
+	        		console.log("botmessage: " + botmessage);
+	       			io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
+			});
+		}else{
+			io.sockets.emit('new message', {msg: 'sagte alles Bruder', user:"OTTO_"+socket.username});
+		}
+    	
 	});
 
 	//New user
 	socket.on('new user', (data, callback) => {
-		console.log(data + " AAAAAEEEOO");
-		callback(true);
-		socket.username = data;
-		users.push(socket.username);
-		updateUsernames();
-		request('https://otto-brain.appspot.com/askBot/My name is '+ socket.username, function (error, response_bot, body) {
-	    	botmessage = response_bot.body;
-	    	console.log("botmessage: " + botmessage);
-	    	io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
-    	});
+		console.log(data + " AAAAAEEEOO - " + users.includes(data));
+		if(users.includes(data) || data == '' ){
+			callback(false);
+		}else{
+			callback(true);
+			socket.username = data;
+			users.push(socket.username);
+			updateUsernames();
+			request('https://otto-brain.appspot.com/askBot/My name is '+ socket.username, function (error, response_bot, body) {
+	    			botmessage = response_bot.body;
+	    			console.log("botmessage: " + botmessage);
+		    		io.sockets.emit('new message', {msg: botmessage, user:"OTTO_"+socket.username});
+	    		});
+		}
 	});
 });
 
 function updateUsernames(){
 	io.sockets.emit('get users', users);
-}
+};
 

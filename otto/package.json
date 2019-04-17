@@ -4,7 +4,7 @@
   "description": "a very boring (chato) bot",
   "main": "index.js",
   "scripts": {
-    "start": "node chato.js",
+    "start": "node --max_old_space_size=8192 chato.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "gabriel raithz",
@@ -13,7 +13,7 @@
     "express": "^4.16.4",
     "google-translate": "^2.2.0",
     "rivescript": "^2.0.0-alpha.6",
-	"request": "^2.88.0"
+    "request": "^2.88.0"
   },
   "devDependencies": {}
 }
